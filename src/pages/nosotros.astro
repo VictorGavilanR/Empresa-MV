@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import NosotrosHero from '../components/nosotros/NosotrosHero.astro'
+import CardMisionVision from "../components/nosotros/CardMisionVision.astro";
+import TimeLine from "../components/nosotros/TimeLine.astro";
+import QuienesSomos from "../components/nosotros/QuienesSomos.astro";
+import Valores from "../components/nosotros/Valores.astro";
+import Estadisticas from "../components/nosotros/Estadisticas.astro";
+import Acordeon from "../components/nosotros/Acordeon.astro";
+import CtaFinal from "../components/nosotros/CtaFinal.astro";
+
+const title = "Nosotros — Servicios MV SPA";
+const description = "Quiénes somos, misión, visión y valores de Servicios MV SPA.";
+
+
+
+
+
+---
+
+<BaseLayout {title} {description} url="https://serviciosmv.cl/nosotros">
+  <Header />
+  <NosotrosHero />
+  <!-- Misión / Visión -->
+  <CardMisionVision />
+  <!-- Mensaje corporativo -->
+  <QuienesSomos />
+  <!-- Timeline / Trayectoria -->
+  <TimeLine />
+  <!-- Valores -->
+  <Valores />
+  <!-- Estadísticas -->
+  <Estadisticas />
+  <!-- FAQs -->
+  <Acordeon />
+  <!-- CTA Final -->
+  <CtaFinal />
+
+
+
+</BaseLayout>

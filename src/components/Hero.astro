@@ -1,0 +1,108 @@
+---
+/* Hero con AOS + parallax (sin dependencias extra) */
+---
+<section
+  id="inicio"
+  class="relative min-h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden"
+  data-aos="fade-zoom-in"
+  data-aos-offset="0"
+  data-aos-duration="700"
+  data-aos-easing="ease-out"
+>
+  <!-- Imagen de fondo -->
+  <div class="absolute inset-0 z-0" aria-hidden="true">
+    <img 
+      src="src/assets/fondo-hero.jpg"
+      alt="Fondo"
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-950/60 via-blue-900/50 to-blue-950/60"></div>
+  </div>
+
+  <!-- Blobs animados + parallax -->
+  <div
+    class="absolute top-20 right-20 w-64 h-64 bg-yellow-400/10 rounded-full blur-3xl animate-pulse will-change-transform"
+    data-parallax
+    data-speed="0.06"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute bottom-20 left-20 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl animate-pulse will-change-transform"
+    data-parallax
+    data-speed="-0.04"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Contenido -->
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1
+        class="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight"
+        data-aos="fade-up"
+        data-aos-delay="80"
+      >
+        Transformamos Ideas en 
+        <span class="text-yellow-400"> Resultados Excepcionales</span>
+      </h1>
+
+      <p
+        class="text-xl md:text-2xl text-gray-100 mb-8 leading-relaxed"
+        data-aos="fade-up"
+        data-aos-delay="160"
+      >
+        Asesoría estratégica y gestión empresarial de élite para llevar tu negocio al siguiente nivel
+      </p>
+
+      <div
+        class="flex flex-col sm:flex-row gap-4 justify-center items-center"
+        data-aos="fade-up"
+        data-aos-delay="240"
+      >
+        <!-- Botón principal -->
+        <a
+          href="#contacto"
+          class="bg-yellow-400 text-blue-950 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-500 transition flex items-center gap-2 group shadow-xl"
+        >
+          Comienza Ahora
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+
+        <!-- Botón secundario -->
+        <a
+          href="#servicios"
+          class="border-2 border-yellow-400 text-yellow-400 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 hover:text-blue-950 transition"
+        >
+          Ver Servicios
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Parallax suave (mouse + scroll) -->
+  <script is:inline>
+    // Parallax por scroll
+    const items = document.querySelectorAll('[data-parallax]');
+    const onScroll = () => {
+      const y = window.scrollY || 0;
+      items.forEach(el => {
+        const speed = parseFloat(el.getAttribute('data-speed') || '0.05');
+        el.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+      });
+    };
+    // Parallax por mouse (sutil)
+    const onMove = (e) => {
+      const { innerWidth: w, innerHeight: h } = window;
+      const dx = (e.clientX - w / 2) / w;
+      const dy = (e.clientY - h / 2) / h;
+      items.forEach(el => {
+        const speed = parseFloat(el.getAttribute('data-speed') || '0.05');
+        el.style.transform += ` translate(${dx * 10 * speed}px, ${dy * 10 * speed}px)`;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('mousemove', onMove, { passive: true });
+    onScroll();
+  </script>
+</section>

@@ -1,0 +1,45 @@
+---
+
+const values = [
+  "Lealtad",
+  "Confidencialidad",
+  "Compromiso",
+  "Responsabilidad social",
+  "Trabajo en equipo",
+  "Ética profesional",
+  "Orientación al crecimiento",
+  "Estabilidad y solidez",
+];
+---
+
+  <section id="valores" class="py-20 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
+          Valores de la <span class="text-yellow-500">Compañía</span>
+        </h2>
+        <p class="text-gray-600 text-lg max-w-3xl mx-auto">
+          Nuestros valores construyen confianza, inspiran decisiones responsables y nos diferencian en un mercado competitivo.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {values.map((value, i) => (
+          <div
+            class="p-6 rounded-xl bg-gradient-to-br from-blue-50 to-gray-50 border border-gray-200 shadow-sm hover:shadow-md hover:border-yellow-300 transition-all duration-300 group"
+            data-aos="fade-up"
+            data-aos-delay={i * 50}
+          >
+            <div class="flex items-start gap-3">
+              <div class="mt-1 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-blue-950 group-hover:text-yellow-600 transition-colors">{value}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>

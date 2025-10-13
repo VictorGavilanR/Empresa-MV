@@ -1,0 +1,146 @@
+---
+const servicios = [
+  "Consulta general",
+  "Contabilidad",
+  "Asesoría Tributaria",
+  "Gestión Laboral",
+  "Constitución de Empresas",
+  "Otro",
+];
+---
+<section id="contacto" class="py-20 px-4 bg-gray-50 overflow-hidden">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
+    <!-- Texto -->
+    <div data-aos="fade-right">
+      <h2 class="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
+        Hablemos de tu proyecto
+      </h2>
+      <p class="text-lg text-gray-700 mb-6">
+        Completa el formulario y te contactaremos a la brevedad. También puedes escribir a
+        <a href="mailto:contacto@serviciosmvspa.cl" class="text-yellow-600 underline">contacto@serviciosmvspa.cl</a>
+        o llamar al <a href="tel:+56921816517" class="text-yellow-600 underline">+56 9 2181 6517</a>.
+      </p>
+
+      <ul class="space-y-2 text-gray-700">
+        <li data-aos="fade-up" data-aos-delay="80">• Tiempo de respuesta habitual: <strong>24–48h hábiles</strong>.</li>
+        <li data-aos="fade-up" data-aos-delay="140">• Tratamos tus datos con confidencialidad.</li>
+        <li data-aos="fade-up" data-aos-delay="200">• Si necesitas urgencia, indícalo en el mensaje.</li>
+      </ul>
+    </div>
+
+    <!-- Formulario -->
+    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8" data-aos="zoom-in">
+      <form id="contact-form" action="/api/contact" method="POST" class="grid gap-4" novalidate>
+        <!-- Honeypot (antispam) -->
+        <input type="text" name="_company" class="hidden" tabindex="-1" autocomplete="off" />
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div data-aos="fade-up" data-aos-delay="60">
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="nombre">Nombre*</label>
+            <input id="nombre" name="nombre" required placeholder="Tu nombre" autocomplete="name"
+              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-yellow-200" />
+          </div>
+
+          <div data-aos="fade-up" data-aos-delay="100">
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="email">Email*</label>
+            <input id="email" type="email" name="email" required placeholder="tucorreo@ejemplo.com" autocomplete="email"
+              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-yellow-200" />
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div data-aos="fade-up" data-aos-delay="140">
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="telefono">Teléfono</label>
+            <input id="telefono" name="telefono" placeholder="+56 9 ..." autocomplete="tel"
+              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-yellow-200" />
+          </div>
+
+          <div data-aos="fade-up" data-aos-delay="180">
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="servicio">Interés</label>
+            <select id="servicio" name="servicio"
+              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-yellow-200">
+              {servicios.map((s) => <option value={s}>{s}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="220">
+          <label class="block text-sm font-medium text-gray-700 mb-1" for="mensaje">Mensaje*</label>
+          <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos brevemente qué necesitas" maxlength="2000"
+            class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-yellow-200 min-h-36"></textarea>
+        </div>
+
+        <label class="inline-flex items-start gap-3 text-sm text-gray-700" data-aos="fade-up" data-aos-delay="260">
+          <input type="checkbox" name="consent" required class="mt-1" />
+          Acepto el uso de mis datos para ser contactado(a).
+        </label>
+
+        <button
+          id="submit-btn"
+          class="bg-gradient-to-r from-blue-950 to-blue-900 text-yellow-400 px-6 py-3 rounded-lg font-bold hover:from-blue-900 hover:to-blue-800 transition shadow-lg disabled:opacity-60 inline-flex items-center gap-2 justify-center"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          <span data-btn-text>Enviar mensaje</span>
+          <svg data-spinner class="hidden animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8v3a5 5 0 0 0-5 5H4z"></path>
+          </svg>
+        </button>
+
+        <!-- Estados -->
+        <p id="form-success" class="hidden text-green-600 font-medium" role="status" aria-live="polite">
+          ¡Gracias! Recibimos tu mensaje y te contactaremos pronto.
+        </p>
+        <p id="form-error" class="hidden text-red-600" role="alert" aria-live="assertive">
+          Ocurrió un error al enviar. Intenta de nuevo en unos minutos.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mejora progresiva: envío por fetch, feedback inmediato -->
+  <script is:inline>
+    const form = document.getElementById('contact-form');
+    const btn = document.getElementById('submit-btn');
+    const btnText = btn?.querySelector('[data-btn-text]');
+    const spinner = btn?.querySelector('[data-spinner]');
+    const ok = document.getElementById('form-success');
+    const err = document.getElementById('form-error');
+
+    function setLoading(v) {
+      if (!btn) return;
+      btn.disabled = v;
+      if (spinner) spinner.classList.toggle('hidden', !v);
+      if (btnText) btnText.textContent = v ? 'Enviando…' : 'Enviar mensaje';
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      if (!window.fetch) return;
+      e.preventDefault();
+      ok?.classList.add('hidden');
+      err?.classList.add('hidden');
+      setLoading(true);
+
+      try {
+        const resp = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+        const data = await resp.json().catch(() => ({}));
+
+        if (resp.ok && data?.ok) {
+          ok?.classList.remove('hidden');
+          form.reset();
+          // Mueve el foco al mensaje de éxito (accesibilidad)
+          ok?.focus?.();
+        } else {
+          err?.classList.remove('hidden');
+          err?.focus?.();
+        }
+      } catch {
+        err?.classList.remove('hidden');
+        err?.focus?.();
+      } finally {
+        setLoading(false);
+      }
+    });
+  </script>
+</section>

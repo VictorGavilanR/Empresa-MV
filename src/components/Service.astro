@@ -1,0 +1,79 @@
+---
+import { Icon } from "astro-icon/components";
+
+const services = [
+  { icon: "mdi:code-tags", title: "Ingeniería en Informática", description: "Desarrollo de software, ERP/CRM, redes, trazabilidad, ciberseguridad y transformación digital." },
+  { icon: "mdi:palette-outline", title: "Diseño Gráfico", description: "Identidad visual, publicidad impresa, UX/UI, animaciones y manuales gráficos." },
+  { icon: "mdi:factory", title: "Ingeniería Civil Industrial", description: "Optimización de procesos, mejora continua y gestión de trazabilidad y ejecución de proyectos escalables." },
+  { icon: "mdi:food-apple-outline", title: "Ingeniería en Alimentación", description: "Acuicultura, control de calidad, gestión de recursos agrícolas y pesqueros, trazabilidad, importaciones y exportaciones." },
+  { icon: "mdi:hospital-building", title: "Salud Enfermería", description: "Atención primaria, salud ocupacional, control fisiológico, cuidados paliativos y monitoreo clínico." },
+];
+---
+
+<section id="servicios" class="py-20 px-4 bg-gray-50">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16" data-aos="fade-up">
+      <h2 class="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
+        Nuestros <span class="text-yellow-500">Servicios</span>
+      </h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Soluciones integrales diseñadas para impulsar el éxito de tu empresa
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div
+      class="grid md:grid-cols-3 gap-8 justify-center
+             md:[&>*:nth-child(n+4)]:col-span-1 md:[&>*:nth-child(n+4)]:mx-auto
+             [perspective:1000px]"
+    >
+      {services.map((service, i) => (
+        <div
+          data-aos="fade-up"
+          data-aos-delay={100 + i * 80}
+          class="bg-white p-8 rounded-xl shadow-lg transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                 hover:shadow-2xl hover:-translate-y-2 group will-change-transform
+                 [transform-style:preserve-3d]
+                 hover:[transform:rotateX(2deg)_rotateY(-1deg)]
+                 motion-reduce:transition-none motion-reduce:hover:transform-none
+                 max-w-sm w-full"
+        >
+          <div
+            class="bg-gradient-to-br from-blue-950 to-blue-900 w-16 h-16 rounded-lg flex items-center justify-center mb-6
+                    transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+          >
+            <Icon name={service.icon} class="text-yellow-400 w-8 h-8" />
+          </div>
+
+          <h3 class="text-2xl font-bold text-blue-950 mb-3">{service.title}</h3>
+          <p class="text-gray-600 leading-relaxed">{service.description}</p>
+
+          <a
+            href="#contacto"
+            class="mt-6 inline-flex items-center gap-2 text-yellow-500 font-semibold
+                   hover:text-yellow-600 transition-colors duration-300"
+          >
+            Más información
+            <span
+              class="group-hover:translate-x-1 transition-transform duration-300"
+            >
+              →
+            </span>
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-16" data-aos="zoom-in" data-aos-delay="120">
+      <a
+        href="#contacto"
+        class="bg-gradient-to-r from-blue-950 to-blue-900 text-yellow-400 px-10 py-4 rounded-lg font-bold text-lg
+               hover:from-blue-900 hover:to-blue-800 transition-colors duration-500 shadow-xl"
+      >
+        Consulta Gratuita
+      </a>
+    </div>
+  </div>
+</section>

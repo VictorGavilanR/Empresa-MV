@@ -1,0 +1,76 @@
+---
+import { Icon } from "astro-icon/components";
+
+const steps = [
+  {
+    icon: "mdi:account-voice",
+    title: "Escuchamos",
+    description:
+      "Analizamos tus objetivos para entender tus necesidades reales.",
+  },
+  {
+    icon: "mdi:lightbulb-outline",
+    title: "Diseñamos",
+    description:
+      "Proponemos soluciones eficientes, personalizadas y escalables.",
+  },
+  {
+    icon: "mdi:cog-outline",
+    title: "Ejecutamos",
+    description:
+      "Implementamos con precisión, calidad y foco en resultados.",
+  },
+  {
+    icon: "mdi:chart-line",
+    title: "Optimizamos",
+    description:
+      "Medimos y mejoramos continuamente para potenciar tu crecimiento.",
+  },
+];
+
+---
+
+<section class="py-20 px-4 bg-gray-50 overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <!-- Título -->
+    <div class="text-center mb-16" data-aos="fade-up">
+      <h2 class="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
+        ¿Cómo trabajamos?
+      </h2>
+      <div class="w-24 h-1 bg-yellow-500 mx-auto"></div>
+    </div>
+
+    <!-- Pasos (sutil + suave) -->
+    <div class="relative grid md:grid-cols-2 lg:grid-cols-4 gap-8 [perspective:1000px]">
+      <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/30 to-transparent pointer-events-none"></div>
+
+      {steps.map((step, i) => (
+        <div
+          data-aos="fade-up"
+          data-aos-delay={120 + i * 120}
+          class="group relative bg-white rounded-xl p-8 shadow-lg ring-1 ring-black/5
+                 motion-safe:transition-all motion-safe:duration-700 motion-safe:ease-[cubic-bezier(.22,1,.36,1)]
+                 hover:shadow-2xl hover:ring-black/10
+                 will-change-transform transform-gpu
+                 hover:-translate-y-1 hover:[transform:rotateX(1deg)_rotateY(-1deg)]
+                 touch-manipulation"
+        >
+          <!-- nodo -->
+          <!-- Icono: flota suave -->
+          <div class="mb-6 motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-[cubic-bezier(.22,1,.36,1)] group-hover:-translate-y-1">
+            <Icon name={step.icon} class="text-yellow-400 w-8 h-8" />
+          </div>
+
+          <h3 class="text-2xl font-bold text-blue-950 mb-3">{step.title}</h3>
+          <p class="text-gray-600 leading-relaxed">{step.description}</p>
+
+          <!-- glow sutil al hover -->
+          <div
+            class="pointer-events-none absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 motion-safe:transition-opacity motion-safe:duration-700"
+            style="box-shadow: 0 10px 40px rgba(234,179,8,.15);"
+          ></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

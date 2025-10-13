@@ -1,0 +1,38 @@
+---
+
+const faqs = [
+  { q: "¿Trabajan con empresas de todo Chile?", a: "Sí, de forma presencial y remota. Nos adaptamos a tu operación." },
+  { q: "¿Cómo es el proceso inicial?", a: "Diagnóstico breve, propuesta clara (alcances, plazos, costo) y kickoff." },
+  { q: "¿Ofrecen planes mensuales?", a: "Sí, en contabilidad/tributaria/gestión laboral y soporte continuo." },
+];
+
+---
+
+
+  <section id='faqs' class="py-20 px-4 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
+          Preguntas <span class="text-yellow-500">Frecuentes</span>
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq, idx) => (
+          <details 
+            class="group rounded-xl border border-gray-200 p-5 open:shadow-md open:border-yellow-300 bg-white hover:border-gray-300 transition-all duration-300 cursor-pointer" 
+            data-aos="fade-up" 
+            data-aos-delay={idx * 80}
+          >
+            <summary class="flex justify-between items-center font-semibold text-blue-950 text-lg hover:text-yellow-600 transition-colors">
+              <span>{faq.q}</span>
+              <svg class="w-5 h-5 transition-transform group-open:rotate-45" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </summary>
+            <p class="mt-4 text-gray-700 leading-relaxed">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>

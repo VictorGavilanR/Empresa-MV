@@ -1,0 +1,58 @@
+---
+
+const links = [
+  { name: "Inicio", href: "#inicio" },
+  { name: "Servicios", href: "#servicios" },
+  { name: "Nosotros", href: "#nosotros" },
+  { name: "Contacto", href: "#contacto" },
+];
+---
+<footer class="bg-blue-950 text-gray-200 pt-16 pb-8 px-4 overflow-hidden">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
+    <!-- Logo y descripción -->
+    <div class="md:col-span-2" data-aos="fade-right">
+      <img src='src/assets/logo-header.png' alt="Servicios MV SPA" class="h-16 w-auto mb-4 object-contain" />
+      <p class="text-gray-400 mb-4 max-w-lg">
+        Brindamos soluciones integrales en contabilidad, asesoría tributaria, gestión laboral y constitución de empresas.
+        Nuestro compromiso es acompañarte en cada paso del crecimiento de tu negocio.
+      </p>
+
+      <ul class="space-y-1">
+        <li>
+          <a href="mailto:contacto@serviciosmvspa.cl" class="text-yellow-400 font-semibold hover:text-yellow-300 transition">
+            contacto@serviciosmvspa.cl
+          </a>
+        </li>
+        <li>
+          <a href="tel:+56921816517" class="text-yellow-400 font-semibold hover:text-yellow-300 transition">
+            +56 9 2181 6517
+          </a>
+        </li>
+      </ul>
+
+      <p class="text-gray-400 mt-2">Lunes a Viernes: 8:00 - 20:00</p>
+    </div>
+
+    <!-- Enlaces -->
+    <nav aria-label="Enlaces del sitio">
+      <h3 class="text-lg font-semibold text-yellow-400 mb-4" data-aos="fade-left">Enlaces</h3>
+      <ul class="space-y-2 [perspective:800px]">
+        {links.map((link, i) => (
+          <li data-aos="fade-up" data-aos-delay={100 + i * 80}>
+            <a
+              href={link.href}
+              class="inline-block hover:text-yellow-400 transition will-change-transform hover:-translate-y-0.5"
+            >
+              {link.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Línea inferior -->
+  <div class="border-t border-blue-800 mt-12 pt-6 text-center text-sm text-gray-400" data-aos="fade-up" data-aos-delay="120">
+    © {new Date().getFullYear()} Servicios MV SPA. Todos los derechos reservados.
+  </div>
+</footer>

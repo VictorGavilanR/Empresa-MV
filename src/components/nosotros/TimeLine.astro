@@ -1,0 +1,39 @@
+---
+
+const timeline = [
+  { year: "1989", title: "Los inicios", desc: "Nace el equipo núcleo con foco en servicios contables y asesoría a pymes." },
+  { year: "2005", title: "Expansión", desc: "Integramos ingeniería y mejora de procesos, sumando capacitación empresarial." },
+  { year: "2016", title: "Transformación digital", desc: "ERP/CRM, trazabilidad y ciberseguridad para sectores regulados." },
+  { year: "Hoy", title: "Excelencia e innovación", desc: "Soporte integral con tecnología, diseño y un enfoque 100% a resultados." },
+];
+---
+
+
+  <section id='trayectoria' class="py-20 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
+          Nuestra <span class="text-yellow-500">Trayectoria</span>
+        </h2>
+        <p class="text-gray-600 text-lg">Más de tres décadas construyendo confianza y excelencia.</p>
+      </div>
+
+      <div class="relative">
+        <div class="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-yellow-500 to-blue-950"></div>
+        
+        <div class="space-y-8">
+          {timeline.map((item, idx) => (
+            <div class={`flex gap-6 ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} data-aos="fade-up" data-aos-delay={idx * 80}>
+              <div class="flex-1 md:text-right md:pr-6">
+                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-2 h-8 w-8 bg-yellow-500 rounded-full shadow-lg ring-4 ring-white"></div>
+                <h3 class="text-xl md:text-2xl font-bold text-blue-950 mb-2">{item.title}</h3>
+                <p class="text-yellow-600 font-semibold text-lg mb-2">{item.year}</p>
+                <p class="text-gray-700">{item.desc}</p>
+              </div>
+              <div class="flex-1"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,97 @@
+---
+const stats = [
+  { number: "35+", label: "Años de experiencia" },
+  { number: "5",   label: "Áreas de especialización" },
+  { number: "100%", label: "Compromiso con resultados" },
+];
+
+// helper opcional para separar valor y sufijo
+const splitValue = (s) => {
+  const match = String(s).match(/^([\d.,]+)(.*)$/);
+  return { value: match ? match[1] : s, suffix: match ? match[2] : "" };
+};
+---
+<section class="py-20 px-4 bg-gradient-to-r from-blue-950 to-blue-900 text-white overflow-hidden">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-3 gap-8">
+      {stats.map((stat, i) => {
+        const { value, suffix } = splitValue(stat.number);
+        return (
+          <div
+            class="text-center p-8 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:border-yellow-400 transition-all
+                   will-change-transform transform-gpu"
+            data-aos="zoom-in"
+            data-aos-delay={i * 120}
+          >
+            <!-- número con contador -->
+            <div
+              class="mb-3 text-5xl md:text-6xl font-extrabold text-yellow-400 leading-none"
+              data-counter
+              data-target={value}           
+              data-suffix={suffix}          
+              data-duration="1400"          
+              data-decimals={value.includes('.') ? '1' : '0'}  
+            >
+              0{suffix}
+            </div>
+
+            <p class="text-blue-100 text-lg">{stat.label}</p>
+
+            <!-- barrita sutil de énfasis -->
+            <div class="mt-4 h-1 w-12 mx-auto bg-yellow-400/70 rounded-full"></div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- contador on-scroll (IntersectionObserver + rAF) -->
+  <script is:inline>
+    const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+    const ease = (t) => 1 - Math.pow(1 - t, 3); // easeOutCubic
+
+    const counters = [...document.querySelectorAll('[data-counter]')];
+    const seen = new WeakSet();
+
+    function animateCount(el) {
+      if (seen.has(el) || prefersReduced) {
+        // si ya se animó o el usuario prefiere menos movimiento -> setea valor final
+        const end = parseFloat(el.dataset.target || '0');
+        const suffix = el.dataset.suffix || '';
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        el.textContent = end.toFixed(decimals) + suffix;
+        seen.add(el);
+        return;
+      }
+
+      const start = 0;
+      const end = parseFloat(el.dataset.target || '0');
+      const suffix = el.dataset.suffix || '';
+      const duration = parseInt(el.dataset.duration || '1200', 10);
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const startTime = performance.now();
+
+      // micro “pop” visual
+      el.style.transform = 'scale(1.02)';
+      el.style.transition = 'transform 300ms ease';
+      setTimeout(() => (el.style.transform = ''), 180);
+
+      function frame(now) {
+        const t = Math.min(1, (now - startTime) / duration);
+        const val = start + (end - start) * ease(t);
+        el.textContent = val.toFixed(decimals) + suffix;
+        if (t < 1) requestAnimationFrame(frame);
+        else seen.add(el);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) animateCount(e.target);
+      });
+    }, { threshold: 0.4, rootMargin: '0px 0px -10% 0px' });
+
+    counters.forEach((el) => io.observe(el));
+  </script>
+</section>
