@@ -1,0 +1,21 @@
+---
+/* No frontmatter necesario */
+---
+
+<!-- Inyecta e inicializa AOS en el cliente -->
+<script>
+  import AOS from 'aos';
+
+  // Asegura que corra en el navegador
+  if (typeof window !== 'undefined') {
+    // Espera a que el DOM esté listo
+    window.addEventListener('DOMContentLoaded', () => {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 80,
+        easing: 'ease-out',
+      });
+    });
+  }
+</script>

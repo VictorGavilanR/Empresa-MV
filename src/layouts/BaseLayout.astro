@@ -1,61 +1,57 @@
 ---
 /* src/layouts/BaseLayout.astro */
 import Footer from "../components/Footer.astro";
+import AOSInit from "../components/AOSInit.astro";
 
 
 const {
   title = "Servicios MV SPA — Asesoría y Gestión",
   description = "Soluciones en contabilidad, asesoría tributaria, gestión laboral y constitución de empresas.",
   url = "https://www.serviciosmvspa.cl",
-  author = 'Servicios MV SPA',
-  scrapping = 'index, follow'
+  author = "Servicios MV SPA",
+  scrapping = "index, follow",
 } = Astro.props;
 ---
+
 <html lang="es" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-	<meta name="author" content={author}>
-	<meta name="robots" content={scrapping}>
-	<meta name="googlebot" content={scrapping}>
-	<meta name="bingbot" content={scrapping}>
-	<meta name="yandexbot" content={scrapping}>
+    <meta name="author" content={author} />
+    <meta name="robots" content={scrapping} />
+    <meta name="googlebot" content={scrapping} />
+    <meta name="bingbot" content={scrapping} />
+    <meta name="yandexbot" content={scrapping} />
     <link rel="canonical" href={url} />
 
-    <slot /> 
-
+    <slot />
+    <AOSInit />
     <Footer />
-
-  </body>
+  </head>
 </html>
 
 <script src="/src/scripts/aos-init.ts" type="module"></script>
 
-
 <style is:global>
-	@import "tailwindcss";
-	@plugin "@midudev/tailwind-animations";
-	@import "aos/dist/aos.css";
+  @import "tailwindcss";
+  @import "aos/dist/aos.css";
 
   :root {
-  --color-primary: #001F3F;   /* Azul noche */
-  --color-secondary: #C5A100; /* Oro clásico */
-  --color-gray: #424242;      /* Gris humo */
-  --color-light: #FAFAFA;     /* Blanco hueso */
-  --color-dark: #121212;      /* Negro carbón */
-}
+    --color-primary: #001f3f; /* Azul noche */
+    --color-secondary: #c5a100; /* Oro clásico */
+    --color-gray: #424242; /* Gris humo */
+    --color-light: #fafafa; /* Blanco hueso */
+    --color-dark: #121212; /* Negro carbón */
+  }
 
-/* Tema oscuro (opcional) */
-[data-theme="dark"] {
-  --color-primary: #121212;   /* Negro carbón */
-  --color-secondary: #FACC15; /* Dorado más brillante */
-  --color-gray: #B0B0B0;
-  --color-light: #FAFAFA;
-  --color-dark: #001F3F;
-}
-
-
-
+  /* Tema oscuro (opcional) */
+  [data-theme="dark"] {
+    --color-primary: #121212; /* Negro carbón */
+    --color-secondary: #facc15; /* Dorado más brillante */
+    --color-gray: #b0b0b0;
+    --color-light: #fafafa;
+    --color-dark: #001f3f;
+  }
 </style>
