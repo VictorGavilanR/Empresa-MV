@@ -39,5 +39,23 @@ const {
 	@plugin "@midudev/tailwind-animations";
 	@import "aos/dist/aos.css";
 
+  :root {
+  --color-primary: #001F3F;   /* Azul noche */
+  --color-secondary: #C5A100; /* Oro clásico */
+  --color-gray: #424242;      /* Gris humo */
+  --color-light: #FAFAFA;     /* Blanco hueso */
+  --color-dark: #121212;      /* Negro carbón */
+}
+
+/* Tema oscuro (opcional) */
+[data-theme="dark"] {
+  --color-primary: #121212;   /* Negro carbón */
+  --color-secondary: #FACC15; /* Dorado más brillante */
+  --color-gray: #B0B0B0;
+  --color-light: #FAFAFA;
+  --color-dark: #001F3F;
+}
+
+
 
 </style>

@@ -15,36 +15,45 @@ const aboutSubmenu = [
 ];
 ---
 
-<header id="header" class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-950 to-blue-900 shadow-lg transition-all duration-300">
+<!-- Utilidad global: var de altura y comportamiento de anclas -->
+<style is:inline>
+  :root { --header-h: 120px; } /* fallback seguro */
+  /* Las secciones con id no quedarán ocultas al navegar por anclas */
+  [id] { scroll-margin-top: calc(var(--header-h, 120px) + 12px); }
+  /* Clase util si prefieres aplicarla a <main> en vez del hero */
+  .pt-header { padding-top: var(--header-h); }
+</style>
+
+<header id="header" class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-dark)] shadow-lg transition-all duration-300">
   <!-- Top Bar -->
-  <div id="topbar" class="bg-blue-950 text-yellow-500 py-2 px-4 transition-all duration-300">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center text-sm">
+  <div id="topbar" class="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-dark)] text-[var(--color-secondary)] py-3 px-4 transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center text-sm leading-tight">
       <div class="flex items-center gap-4">
-        <a href="tel:+56921816517" class="flex items-center gap-1 hover:text-yellow-400 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="inline-block" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.1 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.63 2.6a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.48-1.2a2 2 0 0 1 2.11-.45c.83.3 1.7.51 2.6.63A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:+56921816517" class="flex items-center gap-1 hover:text-[var(--color-light)] transition">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="inline-block" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.1 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.63 2.6a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.48-1.2a2 2 0 0 1 2.11-.45c.83.3 1.7.51 2.6.63A2 2 0 0 1 22 16.92z"/></svg>
           <span>+56 9 2181 6517</span>
         </a>
-        <a href="mailto:contacto@serviciosmvspa.cl" class="flex items-center gap-1 hover:text-yellow-400 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="inline-block" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+        <a href="mailto:contacto@serviciosmvspa.cl" class="flex items-center gap-1 hover:text-[var(--color-light)] transition">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="inline-block" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
           <span>contacto@serviciosmvspa.cl</span>
         </a>
       </div>
-      <div class="text-yellow-500">
+      <div class="text-[var(--color-secondary)]">
         Lunes a Viernes: 8:00 - 20:00
       </div>
     </div>
   </div>
 
   <!-- Main Navigation -->
-  <nav id="nav" class="max-w-7xl mx-auto px-4 py-4 transition-all duration-300">
+  <nav id="nav" class="max-w-7xl mx-auto px-4 py-3 transition-all duration-300">
     <div class="flex justify-between items-center">
       <!-- Logo -->
       <div class="flex items-center">
         <img
           id="logo"
-          src='src/assets/logo-header.png'
+          src="src/assets/logo-header.webp"
           alt="Logo Empresa"
-          class="h-16 w-auto object-contain transition-all duration-300"
+          class="h-14 w-auto object-contain transition-all duration-300"
           width="128"
           height="64"
         />
@@ -52,22 +61,17 @@ const aboutSubmenu = [
 
       <!-- Desktop Menu -->
       <div class="hidden md:flex items-center space-x-1">
-        <a href="/#inicio" class="text-white hover:text-yellow-400 transition font-medium px-4 py-2">
-          Inicio
-        </a>
+        <a href="/#inicio" class="text-[var(--color-light)] hover:text-[var(--color-secondary)] transition font-medium px-4 py-2">Inicio</a>
 
         <!-- Servicios Dropdown -->
         <div class="relative group">
-          <button class="text-white hover:text-yellow-400 transition font-medium px-4 py-2 flex items-center gap-1">
+          <button class="text-[var(--color-light)] hover:text-[var(--color-secondary)] transition font-medium px-4 py-2 flex items-center gap-1">
             Servicios
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" class="group-hover:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
           </button>
-          <div class="absolute top-full left-0 mt-0 w-56 bg-white rounded-b-lg shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out">
+          <div class="absolute top-full left-0 mt-0 w-56 bg-[var(--color-light)] rounded-b-lg shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out">
             {services.map((service) => (
-              <a
-                href={service.href}
-                class="block px-4 py-3 text-blue-950 hover:bg-yellow-50 hover:text-yellow-600 transition"
-              >
+              <a href={service.href} class="block px-4 py-3 text-[var(--color-primary)] hover:bg-[var(--color-light)] hover:text-[var(--color-secondary)] transition">
                 {service.label}
               </a>
             ))}
@@ -76,34 +80,27 @@ const aboutSubmenu = [
 
         <!-- Nosotros Dropdown -->
         <div class="relative group">
-          <button class="text-white hover:text-yellow-400 transition font-medium px-4 py-2 flex items-center gap-1">
+          <button class="text-[var(--color-light)] hover:text-[var(--color-secondary)] transition font-medium px-4 py-2 flex items-center gap-1">
             Nosotros
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" class="group-hover:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
           </button>
-          <div class="absolute top-full left-0 mt-0 w-56 bg-white rounded-b-lg shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out">
+          <div class="absolute top-full left-0 mt-0 w-56 bg-[var(--color-light)] rounded-b-lg shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out">
             {aboutSubmenu.map((item) => (
-              <a
-                href={item.href}
-                class="block px-4 py-3 text-blue-950 hover:bg-yellow-50 hover:text-yellow-600 transition"
-              >
+              <a href={item.href} class="block px-4 py-3 text-[var(--color-primary)] hover:bg-[var(--color-light)] hover:text-[var(--color-secondary)] transition">
                 {item.label}
               </a>
             ))}
           </div>
         </div>
 
-        <a href="#contacto" class="text-white hover:text-yellow-400 transition font-medium px-4 py-2">
-          Contacto
-        </a>
-
-        <a href="#contacto" class="bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-950 px-6 py-2 rounded-lg font-semibold hover:from-yellow-500 hover:to-yellow-600 transition shadow-lg ml-4">
+        <a href="#contacto" class="bg-[var(--color-secondary)] text-[var(--color-dark)] px-6 py-2 rounded-lg font-semibold hover:brightness-110 transition shadow-lg ml-4">
           Solicitar Consulta
         </a>
       </div>
 
       <!-- Mobile Menu Button -->
       <button
-        class="md:hidden text-white p-2"
+        class="md:hidden text-[var(--color-light)] p-2"
         aria-label="Abrir menú"
         onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
       >
@@ -113,92 +110,77 @@ const aboutSubmenu = [
   </nav>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-blue-900/95 border-t border-blue-800">
+  <div id="mobile-menu" class="hidden md:hidden bg-[var(--color-primary)] border-t border-[var(--color-dark)]">
     <div class="max-w-7xl mx-auto px-4 py-4 space-y-2">
-      <a href="#inicio" class="block text-white hover:text-yellow-400 py-2 px-4 hover:bg-blue-950/50 rounded transition" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
-        Inicio
-      </a>
-
-      <!-- Servicios mobile -->
+      <a href="#inicio" class="block text-[var(--color-light)] hover:text-[var(--color-secondary)] py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Inicio</a>
       <details class="group">
-        <summary class="cursor-pointer text-white hover:text-yellow-400 py-2 px-4 hover:bg-blue-950/50 rounded transition flex justify-between items-center font-medium">
+        <summary class="cursor-pointer text-[var(--color-light)] hover:text-[var(--color-secondary)] py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition flex justify-between items-center font-medium">
           Servicios
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="pl-4 space-y-1">
           {services.map((service) => (
-            <a
-              href={service.href}
-              class="block text-yellow-400 hover:text-yellow-300 py-2 px-4 hover:bg-blue-950/50 rounded transition"
-              onclick="document.getElementById('mobile-menu').classList.add('hidden')"
-            >
+            <a href={service.href} class="block text-[var(--color-secondary)] hover:text-[var(--color-light)] py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
               {service.label}
             </a>
           ))}
         </div>
       </details>
-
-      <!-- Nosotros mobile -->
       <details class="group">
-        <summary class="cursor-pointer text-white hover:text-yellow-400 py-2 px-4 hover:bg-blue-950/50 rounded transition flex justify-between items-center font-medium">
+        <summary class="cursor-pointer text-[var(--color-light)] hover:text-[var(--color-secondary)] py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition flex justify-between items-center font-medium">
           Nosotros
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <div class="pl-4 space-y-1">
           {aboutSubmenu.map((item) => (
-            <a
-              href={item.href}
-              class="block text-yellow-400 hover:text-yellow-300 py-2 px-4 hover:bg-blue-950/50 rounded transition"
-              onclick="document.getElementById('mobile-menu').classList.add('hidden')"
-            >
+            <a href={item.href} class="block text-[var(--color-secondary)] hover:text-[var(--color-light)] py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
               {item.label}
             </a>
           ))}
         </div>
       </details>
 
-      <a href="#contacto" class="block text-white hover:text-yellow-400 py-2 px-4 hover:bg-blue-950/50 rounded transition" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
-        Contacto
-      </a>
-
-      <a href="#contacto" class="block bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-950 px-6 py-3 rounded-lg font-semibold hover:from-yellow-500 hover:to-yellow-600 transition shadow-lg text-center mt-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
-        Solicitar Consulta
-      </a>
+      <a href="#contacto" class="block bg-[var(--color-secondary)] text-[var(--color-dark)] px-6 py-3 rounded-lg font-semibold hover:brightness-110 transition shadow-lg text-center mt-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Solicitar Consulta</a>
     </div>
   </div>
 </header>
 
-<!-- Spacer para evitar que el contenido se solape -->
-<div id="spacer" style="height: 140px; transition: height 0.3s;" class="hidden md:block"></div>
+<!-- <div id="spacer" ...></div> -->
 
-<script>
+<script is:inline>
   const header = document.getElementById('header');
   const topbar = document.getElementById('topbar');
   const logo = document.getElementById('logo');
-  const spacer = document.getElementById('spacer');
-  let lastScroll = 0;
 
-  if (header && topbar && logo && spacer) {
+  function setHeaderVar() {
+    if (!header) return;
+    // Altura real del header (topbar + nav) en cada momento
+    const h = header.offsetHeight;
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+  }
+
+  // Observa cambios de tamaño del header (incluye shrink/grow)
+  if (header) {
+    new ResizeObserver(setHeaderVar).observe(header);
+    window.addEventListener('load', setHeaderVar, { once: true });
+    window.addEventListener('resize', setHeaderVar);
+    window.addEventListener('scroll', setHeaderVar, { passive: true });
+  }
+
+  // Mantén tu comportamiento de shrink si quieres:
+  if (topbar && logo) {
     window.addEventListener('scroll', () => {
-      const currentScroll = window.scrollY;
-      
-      if (currentScroll > 50) {
-        // Hacer el header más compacto
+      const y = window.scrollY;
+      if (y > 50) {
         header.classList.add('shadow-xl');
-        topbar.classList.add('py-1');
-        topbar.classList.remove('py-2');
-        logo.classList.add('h-12');
-        logo.classList.remove('h-16');
-        spacer.style.height = '110px';
+        topbar.classList.replace('py-3', 'py-2');
+        logo.classList.replace('h-14', 'h-12');
       } else {
-        // Volver al tamaño normal
         header.classList.remove('shadow-xl');
-        topbar.classList.remove('py-1');
-        topbar.classList.add('py-2');
-        logo.classList.remove('h-12');
-        logo.classList.add('h-16');
-        spacer.style.height = '140px';
+        topbar.classList.replace('py-2', 'py-3');
+        logo.classList.replace('h-12', 'h-14');
       }
-    });
+      setHeaderVar(); // actualiza la var en cada estado
+    }, { passive: true });
   }
 </script>

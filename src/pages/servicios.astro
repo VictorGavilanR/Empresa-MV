@@ -1,0 +1,176 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+
+// TODO: si tienes imágenes por servicio, agrégalas en `image` (opcional).
+const servicios = [
+  {
+    icon: "mdi:code-tags",
+    title: "Ingeniería en Informática",
+    description:
+      "Desarrollo de software a medida, ERP/CRM, redes, ciberseguridad y transformación digital para que tu negocio escale sin fricción.",
+    bullets: ["Software a medida", "ERP/CRM", "Redes y seguridad", "Automatización"],
+    cta: { label: "Cotizar", href: "/#contacto" },
+    image: "/src/assets/informatica.jpg",
+  },
+  {
+    icon: "mdi:palette-outline",
+    title: "Diseño Gráfico",
+    description:
+      "Identidad visual, UX/UI y animación. Diseñamos experiencias consistentes que comunican claro y convierten.",
+    bullets: ["Identidad corporativa", "UX/UI y sitios", "Animación", "Manuales gráficos"],
+    cta: { label: "Cotizar", href: "/#contacto" },
+    image: "/src/assets/diseno-grafico.jpg",
+  },
+  {
+    icon: "mdi:factory",
+    title: "Ingeniería Civil Industrial",
+    description:
+      "Optimización de procesos, mejora continua y gestión de proyectos para escalar capacidad y rentabilidad.",
+    bullets: ["Mejora continua", "Gestión de proyectos", "Análisis técnico-económico", "Estrategias de escalabilidad"],
+    cta: { label: "Cotizar", href: "/#contacto" },
+    image: "/src/assets/industrial.jpg",
+  },
+  {
+    icon: "mdi:food-apple-outline",
+    title: "Ingeniería en Alimentación",
+    description:
+      "Control de calidad, normativa, trazabilidad y exportaciones con foco en inocuidad y eficiencia.",
+    bullets: ["Control de calidad", "Procesamiento y conservación", "Normativa y exportación", "Seguridad alimentaria"],
+    cta: { label: "Cotizar", href: "/#contacto" },
+    image: "/src/assets/ingenieria-alimentos.jpg",
+  },
+  {
+    icon: "mdi:hospital-building",
+    title: "Salud Enfermería",
+    description:
+      "Atención primaria, monitoreo clínico y cuidados paliativos, con enfoque humano y protocolos claros.",
+    bullets: ["Atención primaria", "Monitoreo clínico", "Cuidados paliativos", "Promoción del bienestar"],
+    cta: { label: "Cotizar", href: "/#contacto" },
+    image: "/src/assets/salud.jpg",
+  },
+];
+
+const title = "Servicios";
+const description = "Soluciones integrales en ingeniería, diseño, gestión y salud para crecer con excelencia.";
+---
+
+
+
+<BaseLayout>
+  <Header />
+
+<!-- HERO -->
+<section class="py-20 md:py-24 px-4 text-center text-[var(--color-light)]
+                 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-dark)]">
+  <div class="max-w-5xl mx-auto">
+    <h1 class="text-4xl md:text-6xl font-extrabold">
+      Nuestros <span class="text-[var(--color-secondary)]">Servicios</span>
+    </h1>
+    <p class="mt-4 text-lg md:text-xl opacity-90">
+      Soluciones prácticas y escalables para organizaciones que exigen resultados.
+    </p>
+    <div class="mt-6">
+      <a href="/#contacto"
+         class="inline-flex items-center gap-2 bg-[var(--color-secondary)] text-[var(--color-dark)]
+                px-6 py-3 rounded-lg font-bold hover:brightness-110 transition shadow-lg">
+        Solicitar consulta →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- GRID: TODOS JUNTOS -->
+<section class="py-16 px-4 bg-[var(--color-light)]">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+      {servicios.map((s, i) => (
+        <article
+          class="group bg-white rounded-2xl border shadow-sm overflow-hidden
+                 border-[color:color-mix(in_oklab,var(--color-gray)65%,white_35%)]
+                 hover:shadow-lg transition-all duration-300"
+          data-aos="fade-up"
+          data-aos-delay={i * 80}
+        >
+          <!-- Media -->
+          {s.image ? (
+            <div class="h-40 md:h-48 w-full overflow-hidden">
+              <img src={s.image} alt={s.title}
+                   class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                   loading="lazy" decoding="async" />
+            </div>
+          ) : null}
+
+          <!-- Content -->
+          <div class="p-7 md:p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center
+                          bg-gradient-to-br from-[var(--color-primary)]
+                          to-[color-mix(in_oklab,var(--color-primary)90%,var(--color-dark)10%)]">
+                <Icon name={s.icon} class="w-7 h-7 text-[var(--color-secondary)]" />
+              </div>
+              <h3 class="text-xl md:text-2xl font-bold text-[var(--color-primary)]">{s.title}</h3>
+            </div>
+
+            <p class="text-[color:color-mix(in_oklab,var(--color-dark)80%,var(--color-gray)20%)] leading-relaxed">
+              {s.description}
+            </p>
+
+            {s.bullets?.length ? (
+              <ul class="mt-4 space-y-1.5 text-sm
+                         text-[color:color-mix(in_oklab,var(--color-dark)78%,var(--color-gray)22%)]">
+                {s.bullets.map((b) => (
+                  <li class="flex gap-2">
+                    <span class="text-[var(--color-secondary)]">✓</span>{b}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+
+            <div class="mt-6">
+              <a href={s.cta.href}
+                 class="inline-flex items-center gap-2 font-semibold
+                        text-[var(--color-secondary)] hover:brightness-110">
+                {s.cta.label} <span class="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="py-16 px-4 text-center text-[var(--color-light)]
+                 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-dark)]">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-extrabold">¿Listo para impulsar tu negocio?</h2>
+    <p class="mt-3 opacity-90">Cuéntanos tus objetivos y armamos un plan claro y alcanzable.</p>
+    <a href="/#contacto"
+       class="inline-flex items-center gap-2 mt-6 bg-[var(--color-secondary)] text-[var(--color-dark)]
+              px-6 py-3 rounded-lg font-bold hover:brightness-110 transition shadow-lg">
+      Contáctanos →
+    </a>
+  </div>
+</section>
+
+<!-- SEO: JSON-LD -->
+<script is:inline type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Servicios",
+  "description": "Soluciones integrales en ingeniería, diseño, gestión y salud.",
+  "hasPart": [
+    { "@type": "Service", "name": "Ingeniería en Informática" },
+    { "@type": "Service", "name": "Diseño Gráfico" },
+    { "@type": "Service", "name": "Ingeniería Civil Industrial" },
+    { "@type": "Service", "name": "Ingeniería en Alimentación" },
+    { "@type": "Service", "name": "Salud Enfermería" }
+  ]
+}
+</script>
+
+</BaseLayout>

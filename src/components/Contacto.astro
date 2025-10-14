@@ -8,23 +8,39 @@ const servicios = [
   "Otro",
 ];
 ---
-<section id="contacto" class="py-20 px-4 bg-gray-50 overflow-hidden">
+<section id="contacto" class="py-20 px-4 bg-[var(--color-light)] overflow-hidden">
   <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
     <!-- Texto -->
     <div data-aos="fade-right">
-      <h2 class="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
+      <h2 class="text-4xl md:text-5xl font-bold text-[var(--color-primary)] mb-4">
         Hablemos de tu proyecto
       </h2>
-      <p class="text-lg text-gray-700 mb-6">
+      <p class="text-lg text-[color:color-mix(in_oklab,var(--color-dark)70%,var(--color-gray)30%)] mb-6">
         Completa el formulario y te contactaremos a la brevedad. También puedes escribir a
-        <a href="mailto:contacto@serviciosmvspa.cl" class="text-yellow-600 underline">contacto@serviciosmvspa.cl</a>
-        o llamar al <a href="tel:+56921816517" class="text-yellow-600 underline">+56 9 2181 6517</a>.
+        <a href="mailto:contacto@serviciosmvspa.cl" class="text-[var(--color-secondary)] underline">contacto@serviciosmvspa.cl</a>
+        o llamar al <a href="tel:+56921816517" class="text-[var(--color-secondary)] underline">+56 9 2181 6517</a>.
       </p>
 
-      <ul class="space-y-2 text-gray-700">
-        <li data-aos="fade-up" data-aos-delay="80">• Tiempo de respuesta habitual: <strong>24–48h hábiles</strong>.</li>
-        <li data-aos="fade-up" data-aos-delay="140">• Tratamos tus datos con confidencialidad.</li>
-        <li data-aos="fade-up" data-aos-delay="200">• Si necesitas urgencia, indícalo en el mensaje.</li>
+      <!-- Lista con ticks -->
+      <ul class="space-y-3 text-[color:color-mix(in_oklab,var(--color-dark)80%,var(--color-gray)20%)]">
+        {[
+          "Tiempo de respuesta habitual: ",
+          "Tratamos tus datos con confidencialidad.",
+          "Si necesitas urgencia, indícalo en el mensaje.",
+        ].map((txt, idx) => (
+          <li class="flex items-start gap-3" data-aos="fade-up" data-aos-delay={80 + idx * 60}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="flex-shrink-0 mt-1 text-[var(--color-secondary)]"
+              width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5" />
+            </svg>
+            <p class="leading-relaxed">
+              {idx === 0 ? <>Tiempo de respuesta habitual: <strong>24–48h hábiles</strong>.</> : txt}
+            </p>
+          </li>
+        ))}
       </ul>
     </div>
 
@@ -36,63 +52,63 @@ const servicios = [
 
         <div class="grid md:grid-cols-2 gap-4">
           <div data-aos="fade-up" data-aos-delay="60">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="nombre">Nombre*</label>
+            <label class="block text-sm font-medium text-[color:color-mix(in_oklab,var(--color-dark)75%,var(--color-gray)25%)] mb-1" for="nombre">Nombre*</label>
             <input id="nombre" name="nombre" required placeholder="Tu nombre" autocomplete="name"
-              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-yellow-200" />
+              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-[color:color-mix(in_oklab,var(--color-secondary)30%,transparent)]" />
           </div>
 
           <div data-aos="fade-up" data-aos-delay="100">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="email">Email*</label>
+            <label class="block text-sm font-medium text-[color:color-mix(in_oklab,var(--color-dark)75%,var(--color-gray)25%)] mb-1" for="email">Email*</label>
             <input id="email" type="email" name="email" required placeholder="tucorreo@ejemplo.com" autocomplete="email"
-              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-yellow-200" />
+              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-[color:color-mix(in_oklab,var(--color-secondary)30%,transparent)]" />
           </div>
         </div>
 
         <div class="grid md:grid-cols-2 gap-4">
           <div data-aos="fade-up" data-aos-delay="140">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="telefono">Teléfono</label>
+            <label class="block text-sm font-medium text-[color:color-mix(in_oklab,var(--color-dark)75%,var(--color-gray)25%)] mb-1" for="telefono">Teléfono</label>
             <input id="telefono" name="telefono" placeholder="+56 9 ..." autocomplete="tel"
-              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-yellow-200" />
+              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-[color:color-mix(in_oklab,var(--color-secondary)30%,transparent)]" />
           </div>
 
           <div data-aos="fade-up" data-aos-delay="180">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="servicio">Interés</label>
+            <label class="block text-sm font-medium text-[color:color-mix(in_oklab,var(--color-dark)75%,var(--color-gray)25%)] mb-1" for="servicio">Interés</label>
             <select id="servicio" name="servicio"
-              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-yellow-200">
+              class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-[color:color-mix(in_oklab,var(--color-secondary)30%,transparent)]">
               {servicios.map((s) => <option value={s}>{s}</option>)}
             </select>
           </div>
         </div>
 
         <div data-aos="fade-up" data-aos-delay="220">
-          <label class="block text-sm font-medium text-gray-700 mb-1" for="mensaje">Mensaje*</label>
+          <label class="block text-sm font-medium text-[color:color-mix(in_oklab,var(--color-dark)75%,var(--color-gray)25%)] mb-1" for="mensaje">Mensaje*</label>
           <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos brevemente qué necesitas" maxlength="2000"
-            class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-yellow-200 min-h-36"></textarea>
+            class="w-full border rounded-lg p-3 outline-none focus:ring focus:ring-[color:color-mix(in_oklab,var(--color-secondary)30%,transparent)] min-h-36"></textarea>
         </div>
 
-        <label class="inline-flex items-start gap-3 text-sm text-gray-700" data-aos="fade-up" data-aos-delay="260">
+        <label class="inline-flex items-start gap-3 text-sm text-[color:color-mix(in_oklab,var(--color-dark)80%,var(--color-gray)20%)]" data-aos="fade-up" data-aos-delay="260">
           <input type="checkbox" name="consent" required class="mt-1" />
           Acepto el uso de mis datos para ser contactado(a).
         </label>
 
         <button
           id="submit-btn"
-          class="bg-gradient-to-r from-blue-950 to-blue-900 text-yellow-400 px-6 py-3 rounded-lg font-bold hover:from-blue-900 hover:to-blue-800 transition shadow-lg disabled:opacity-60 inline-flex items-center gap-2 justify-center"
+          class="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-dark)] text-[var(--color-secondary)] px-6 py-3 rounded-lg font-bold hover:brightness-110 transition shadow-lg disabled:opacity-60 inline-flex items-center gap-2 justify-center"
           data-aos="fade-up"
           data-aos-delay="300"
         >
           <span data-btn-text>Enviar mensaje</span>
-          <svg data-spinner class="hidden animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+          <svg data-spinner class="hidden animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8v3a5 5 0 0 0-5 5H4z"></path>
           </svg>
         </button>
 
         <!-- Estados -->
-        <p id="form-success" class="hidden text-green-600 font-medium" role="status" aria-live="polite">
+        <p id="form-success" class="hidden text-green-600 font-medium" role="status" aria-live="polite" tabindex="-1">
           ¡Gracias! Recibimos tu mensaje y te contactaremos pronto.
         </p>
-        <p id="form-error" class="hidden text-red-600" role="alert" aria-live="assertive">
+        <p id="form-error" class="hidden text-red-600" role="alert" aria-live="assertive" tabindex="-1">
           Ocurrió un error al enviar. Intenta de nuevo en unos minutos.
         </p>
       </form>
@@ -129,7 +145,6 @@ const servicios = [
         if (resp.ok && data?.ok) {
           ok?.classList.remove('hidden');
           form.reset();
-          // Mueve el foco al mensaje de éxito (accesibilidad)
           ok?.focus?.();
         } else {
           err?.classList.remove('hidden');

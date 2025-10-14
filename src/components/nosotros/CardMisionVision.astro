@@ -1,43 +1,73 @@
----
+\---
 import { Icon } from "astro-icon/components";
 
-const mision = 'Dar y brindar soluciones integrales de alta calidad en tecnología, ingeniería, diseño y soporte, que impulsen la transformación de tu empresa con innovación y gestión digital permitiendo un desarrollo armónico y de crecimiento sostenible de nuestros clientes, con compromiso ético, excelencia operativa e innovación constante.';
+const mision =
+  'Dar y brindar soluciones integrales de alta calidad en tecnología, ingeniería, diseño y soporte, que impulsen la transformación de tu empresa con innovación y gestión digital permitiendo un desarrollo armónico y de crecimiento sostenible de nuestros clientes, con compromiso ético, excelencia operativa e innovación constante.';
 
-const vision = 'Ser referentes a nivel local, nacional e internacional de servicios integrales de ingeniería y consultoría, reconocidos por nuestra eficiencia, creatividad y enfoque humano, generando impacto positivo en nuestros clientes y la sociedad con compromiso ético establecidos por nuestra compañía.';
+const vision =
+  'Ser referentes a nivel local, nacional e internacional de servicios integrales de ingeniería y consultoría, reconocidos por nuestra eficiencia, creatividad y enfoque humano, generando impacto positivo en nuestros clientes y la sociedad con compromiso ético establecidos por nuestra compañía.';
 ---
 
 <!-- Misión / Visión -->
-<section class="py-20 px-4 bg-white">
+<section class="py-20 px-4 bg-[var(--color-light)]">
   <div class="max-w-6xl mx-auto">
-    <div class="grid lg:grid-cols-2 gap-8">
+    <div class="grid gap-8 lg:grid-cols-2">
       <!-- Misión -->
-      <div 
-        class="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100/50 border border-blue-200 shadow-md hover:shadow-lg transition-all duration-300"
+      <article
+        class="p-8 md:p-10 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300"
+        style="
+          background:
+            linear-gradient(135deg,
+              color-mix(in oklab, var(--color-light) 92%, var(--color-primary) 8%),
+              color-mix(in oklab, var(--color-light) 96%, var(--color-primary) 4%)
+            );
+          border: 1px solid color-mix(in oklab, var(--color-primary) 20%, transparent);
+        "
         data-aos="fade-right"
       >
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-12 h-12 rounded-lg bg-yellow-500 flex items-center justify-center">
-            <Icon name="mdi:target-variant" class="text-blue-950 w-7 h-7" />
+          <div
+            class="w-12 h-12 rounded-lg flex items-center justify-center"
+            style="background: color-mix(in oklab, var(--color-secondary) 85%, transparent);"
+            aria-hidden="true"
+          >
+            <Icon name="mdi:target-variant" class="w-7 h-7 text-[var(--color-primary)]" />
           </div>
-          <h2 class="text-3xl font-bold text-blue-950">Misión</h2>
+          <h2 class="text-3xl font-bold text-[var(--color-primary)]">Misión</h2>
         </div>
-        <p class="text-gray-700 leading-relaxed text-lg">{mision}</p>
-      </div>
+        <p class="text-lg leading-relaxed text-[color:color-mix(in_oklab,var(--color-dark)80%,var(--color-gray)20%)]">
+          {mision}
+        </p>
+      </article>
 
       <!-- Visión -->
-      <div 
-        class="p-8 md:p-10 rounded-2xl bg-gradient-to-br from-yellow-50 to-yellow-100/50 border border-yellow-200 shadow-md hover:shadow-lg transition-all duration-300"
+      <article
+        class="p-8 md:p-10 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300"
+        style="
+          background:
+            linear-gradient(135deg,
+              color-mix(in oklab, var(--color-light) 92%, var(--color-secondary) 8%),
+              color-mix(in oklab, var(--color-light) 96%, var(--color-secondary) 4%)
+            );
+          border: 1px solid color-mix(in oklab, var(--color-secondary) 28%, transparent);
+        "
         data-aos="fade-left"
         data-aos-delay="100"
       >
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-12 h-12 rounded-lg bg-yellow-500 flex items-center justify-center">
-            <Icon name="mdi:eye-outline" class="text-blue-950 w-7 h-7" />
+          <div
+            class="w-12 h-12 rounded-lg flex items-center justify-center"
+            style="background: color-mix(in oklab, var(--color-secondary) 85%, transparent);"
+            aria-hidden="true"
+          >
+            <Icon name="mdi:eye-outline" class="w-7 h-7 text-[var(--color-primary)]" />
           </div>
-          <h2 class="text-3xl font-bold text-blue-950">Visión</h2>
+          <h2 class="text-3xl font-bold text-[var(--color-primary)]">Visión</h2>
         </div>
-        <p class="text-gray-700 leading-relaxed text-lg">{vision}</p>
-      </div>
+        <p class="text-lg leading-relaxed text-[color:color-mix(in_oklab,var(--color-dark)80%,var(--color-gray)20%)]">
+          {vision}
+        </p>
+      </article>
     </div>
   </div>
 </section>

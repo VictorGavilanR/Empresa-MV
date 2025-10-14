@@ -1,6 +1,4 @@
----
-/* Hero con AOS + parallax (sin dependencias extra) */
----
+<!-- Hero con paleta y parallax sutil -->
 <section
   id="inicio"
   class="relative min-h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden"
@@ -12,22 +10,28 @@
   <!-- Imagen de fondo -->
   <div class="absolute inset-0 z-0" aria-hidden="true">
     <img 
-      src="src/assets/fondo-hero.jpg"
+      src="src/assets/fondo-hero.webp"
       alt="Fondo"
       class="w-full h-full object-cover"
     />
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-950/60 via-blue-900/50 to-blue-950/60"></div>
+    <!-- Overlay con variables -->
+    <div
+      class="absolute inset-0"
+      style="background: linear-gradient(135deg, color-mix(in oklab, var(--color-primary) 70%, transparent), color-mix(in oklab, var(--color-dark) 70%, transparent));">
+    </div>
   </div>
 
-  <!-- Blobs animados + parallax -->
+  <!-- Blobs (sin animate-pulse) + parallax -->
   <div
-    class="absolute top-20 right-20 w-64 h-64 bg-yellow-400/10 rounded-full blur-3xl animate-pulse will-change-transform"
+    class="absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl"
+    style="background: color-mix(in oklab, var(--color-secondary) 18%, transparent);"
     data-parallax
     data-speed="0.06"
     aria-hidden="true"
   ></div>
   <div
-    class="absolute bottom-20 left-20 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl animate-pulse will-change-transform"
+    class="absolute bottom-20 left-20 w-96 h-96 rounded-full blur-3xl"
+    style="background: color-mix(in oklab, var(--color-secondary) 14%, transparent);"
     data-parallax
     data-speed="-0.04"
     aria-hidden="true"
@@ -37,16 +41,16 @@
   <div class="container mx-auto px-4 relative z-10">
     <div class="max-w-4xl mx-auto text-center">
       <h1
-        class="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight"
+        class="text-5xl md:text-7xl font-bold mb-6 leading-tight text-[var(--color-light)]"
         data-aos="fade-up"
         data-aos-delay="80"
       >
         Transformamos Ideas en 
-        <span class="text-yellow-400"> Resultados Excepcionales</span>
+        <span class="text-[var(--color-secondary)]"> Resultados Excepcionales</span>
       </h1>
 
       <p
-        class="text-xl md:text-2xl text-gray-100 mb-8 leading-relaxed"
+        class="text-xl md:text-xl mb-8 leading-relaxed text-[color:color-mix(in_oklab,var(--color-light)85%,var(--color-gray)15%)]"
         data-aos="fade-up"
         data-aos-delay="160"
       >
@@ -61,18 +65,15 @@
         <!-- Botón principal -->
         <a
           href="#contacto"
-          class="bg-yellow-400 text-blue-950 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-500 transition flex items-center gap-2 group shadow-xl"
+          class="bg-[var(--color-secondary)] text-[var(--color-dark)] px-8 py-4 rounded-lg font-bold text-lg transition shadow-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary)]/60"
         >
           Comienza Ahora
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
         </a>
 
         <!-- Botón secundario -->
         <a
           href="#servicios"
-          class="border-2 border-yellow-400 text-yellow-400 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 hover:text-blue-950 transition"
+          class="border-2 border-[var(--color-secondary)] text-[var(--color-secondary)] px-8 py-4 rounded-lg font-bold text-lg transition hover:bg-[var(--color-secondary)] hover:text-[var(--color-dark)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary)]/60"
         >
           Ver Servicios
         </a>
@@ -80,29 +81,54 @@
     </div>
   </div>
 
-  <!-- Parallax suave (mouse + scroll) -->
+  <!-- Parallax suave (scroll + mouse) -->
   <script is:inline>
-    // Parallax por scroll
-    const items = document.querySelectorAll('[data-parallax]');
-    const onScroll = () => {
-      const y = window.scrollY || 0;
-      items.forEach(el => {
-        const speed = parseFloat(el.getAttribute('data-speed') || '0.05');
-        el.style.transform = `translate3d(0, ${y * speed}px, 0)`;
-      });
-    };
-    // Parallax por mouse (sutil)
-    const onMove = (e) => {
-      const { innerWidth: w, innerHeight: h } = window;
-      const dx = (e.clientX - w / 2) / w;
-      const dy = (e.clientY - h / 2) / h;
-      items.forEach(el => {
-        const speed = parseFloat(el.getAttribute('data-speed') || '0.05');
-        el.style.transform += ` translate(${dx * 10 * speed}px, ${dy * 10 * speed}px)`;
-      });
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('mousemove', onMove, { passive: true });
-    onScroll();
+    (() => {
+      const items = Array.from(document.querySelectorAll('[data-parallax]'));
+      if (!items.length) return;
+
+      let scrollY = window.scrollY || 0;
+      let mouseX = 0, mouseY = 0;
+      let rafId = null;
+
+      const speeds = new WeakMap();
+      items.forEach(el => speeds.set(el, parseFloat(el.getAttribute('data-speed') || '0.05')));
+
+      const onScroll = () => {
+        scrollY = window.scrollY || 0;
+        requestTick();
+      };
+
+      const onMove = (e) => {
+        const { innerWidth: w, innerHeight: h } = window;
+        const dx = (e.clientX - w / 2) / w;  // -0.5..0.5 aprox
+        const dy = (e.clientY - h / 2) / h;
+        // amplitud muy sutil (10px máx) y luego multiplicada por speed
+        mouseX = dx * 10;
+        mouseY = dy * 10;
+        requestTick();
+      };
+
+      const render = () => {
+        rafId = null;
+        for (const el of items) {
+          const s = speeds.get(el) || 0.05;
+          const ty = scrollY * s;               // desplazamiento por scroll
+          const mx = mouseX * s;                // desplazamiento por mouse (x)
+          const my = mouseY * s;                // desplazamiento por mouse (y)
+          // un solo transform, sin concatenar strings
+          el.style.transform = `translate3d(${mx}px, ${ty + my}px, 0)`;
+        }
+      };
+
+      const requestTick = () => {
+        if (rafId == null) rafId = requestAnimationFrame(render);
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('mousemove', onMove, { passive: true });
+      // primer pintado
+      onScroll();
+    })();
   </script>
 </section>

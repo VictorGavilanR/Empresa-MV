@@ -1,5 +1,4 @@
 ---
-
 const values = [
   "Lealtad",
   "Confidencialidad",
@@ -12,34 +11,53 @@ const values = [
 ];
 ---
 
-  <section id="valores" class="py-20 px-4 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16" data-aos="fade-up">
-        <h2 class="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
-          Valores de la <span class="text-yellow-500">Compañía</span>
-        </h2>
-        <p class="text-gray-600 text-lg max-w-3xl mx-auto">
-          Nuestros valores construyen confianza, inspiran decisiones responsables y nos diferencian en un mercado competitivo.
-        </p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {values.map((value, i) => (
-          <div
-            class="p-6 rounded-xl bg-gradient-to-br from-blue-50 to-gray-50 border border-gray-200 shadow-sm hover:shadow-md hover:border-yellow-300 transition-all duration-300 group"
-            data-aos="fade-up"
-            data-aos-delay={i * 50}
-          >
-            <div class="flex items-start gap-3">
-              <div class="mt-1 flex-shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold text-blue-950 group-hover:text-yellow-600 transition-colors">{value}</h3>
-            </div>
-          </div>
-        ))}
-      </div>
+<section id="valores" class="py-20 px-4 bg-[var(--color-light)]">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16" data-aos="fade-up">
+      <h2 class="text-4xl md:text-5xl font-bold text-[var(--color-primary)] mb-4">
+        Valores de la <span class="text-[var(--color-secondary)]">Compañía</span>
+      </h2>
+      <p class="text-lg max-w-3xl mx-auto text-[color:color-mix(in_oklab,var(--color-dark)70%,var(--color-gray)30%)]">
+        Nuestros valores construyen confianza, inspiran decisiones responsables y nos diferencian en un mercado competitivo.
+      </p>
     </div>
-  </section>
+
+    <!-- Grid de valores -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {values.map((value, i) => (
+        <div
+          class="p-6 rounded-xl border shadow-sm bg-[color-mix(in_oklab,var(--color-light)95%,var(--color-primary)5%)]
+                 border-[color-mix(in_oklab,var(--color-gray)60%,var(--color-light)40%)]
+                 hover:shadow-md hover:border-[var(--color-secondary)]
+                 transition-all duration-300 group"
+          data-aos="fade-up"
+          data-aos-delay={i * 50}
+        >
+          <div class="flex items-start gap-3">
+            <div class="mt-1 flex-shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-[var(--color-secondary)]"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <h3
+              class="text-lg font-semibold text-[var(--color-primary)]
+                     group-hover:text-[var(--color-secondary)] transition-colors"
+            >
+              {value}
+            </h3>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

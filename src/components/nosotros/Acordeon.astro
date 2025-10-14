@@ -1,38 +1,47 @@
 ---
-
 const faqs = [
   { q: "¿Trabajan con empresas de todo Chile?", a: "Sí, de forma presencial y remota. Nos adaptamos a tu operación." },
   { q: "¿Cómo es el proceso inicial?", a: "Diagnóstico breve, propuesta clara (alcances, plazos, costo) y kickoff." },
   { q: "¿Ofrecen planes mensuales?", a: "Sí, en contabilidad/tributaria/gestión laboral y soporte continuo." },
 ];
-
 ---
 
-
-  <section id='faqs' class="py-20 px-4 bg-white">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12" data-aos="fade-up">
-        <h2 class="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
-          Preguntas <span class="text-yellow-500">Frecuentes</span>
-        </h2>
-      </div>
-
-      <div class="space-y-4">
-        {faqs.map((faq, idx) => (
-          <details 
-            class="group rounded-xl border border-gray-200 p-5 open:shadow-md open:border-yellow-300 bg-white hover:border-gray-300 transition-all duration-300 cursor-pointer" 
-            data-aos="fade-up" 
-            data-aos-delay={idx * 80}
-          >
-            <summary class="flex justify-between items-center font-semibold text-blue-950 text-lg hover:text-yellow-600 transition-colors">
-              <span>{faq.q}</span>
-              <svg class="w-5 h-5 transition-transform group-open:rotate-45" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-              </svg>
-            </summary>
-            <p class="mt-4 text-gray-700 leading-relaxed">{faq.a}</p>
-          </details>
-        ))}
-      </div>
+<section id="faqs" class="py-20 px-4 bg-[var(--color-light)]">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <h2 class="text-4xl md:text-5xl font-bold text-[var(--color-primary)] mb-4">
+        Preguntas <span class="text-[var(--color-secondary)]">Frecuentes</span>
+      </h2>
     </div>
-  </section>
+
+    <div class="space-y-4">
+      {faqs.map((faq, idx) => (
+        <details
+          class="group rounded-xl p-5 bg-white border transition-all duration-300 cursor-pointer
+                 border-[color:color-mix(in_oklab,var(--color-gray)60%,var(--color-light)40%)]
+                 hover:border-[color:color-mix(in_oklab,var(--color-secondary)40%,transparent)]
+                 open:shadow-md open:border-[var(--color-secondary)]/60"
+          data-aos="fade-up"
+          data-aos-delay={idx * 80}
+        >
+          <summary
+            class="flex justify-between items-center font-semibold text-lg text-[var(--color-primary)]
+                   hover:text-[var(--color-secondary)] transition-colors list-none focus:outline-none
+                   focus-visible:ring-2 focus-visible:ring-[var(--color-secondary)]/50 rounded-lg px-1"
+          >
+            <span>{faq.q}</span>
+            <svg class="w-5 h-5 shrink-0 transition-transform group-open:rotate-45" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+          </summary>
+
+          <div class="mt-4 text-[color:color-mix(in_oklab,var(--color-dark)80%,var(--color-gray)20%)] leading-relaxed
+                      transition-[opacity,transform] duration-300 group-open:opacity-100 group-open:translate-y-0
+                      opacity-90 -translate-y-1">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

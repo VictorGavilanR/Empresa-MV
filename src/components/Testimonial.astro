@@ -5,18 +5,18 @@ const testimonials = [
   '"Nos ayudaron a digitalizar procesos clave. ¡Un gran aliado!"',
 ];
 ---
-<section class="py-20 px-4 bg-white overflow-hidden">
+<section class="py-20 px-4 bg-[var(--color-light)] overflow-hidden">
   <div class="max-w-7xl mx-auto">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <!-- Contenido izquierdo -->
       <div>
         <h2
-          class="text-4xl md:text-5xl font-bold text-blue-950 mb-8 relative"
+          class="text-4xl md:text-5xl font-bold text-[var(--color-primary)] mb-8 relative"
           data-aos="fade-right"
         >
           Lo que dicen nuestros clientes
           <!-- comillas decorativas -->
-          <svg class="absolute -top-6 -left-6 opacity-10" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+          <svg class="absolute -top-6 -left-6 opacity-10 text-[var(--color-primary)]" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M7.17 6A5.17 5.17 0 0 0 2 11.17V18h6v-6H5.17A3.17 3.17 0 0 1 8.34 8h.83V6zm10 0A5.17 5.17 0 0 0 12 11.17V18h6v-6h-2.83A3.17 3.17 0 0 1 18.34 8h.83V6z"/>
           </svg>
         </h2>
@@ -31,21 +31,22 @@ const testimonials = [
               {idx < 2 ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="text-yellow-500 flex-shrink-0 mt-1"
+                  class="text-[var(--color-secondary)] flex-shrink-0 mt-1"
                   width="24"
                   height="24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="3"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5" />
                 </svg>
               ) : (
-                <div class="w-1 bg-yellow-500 flex-shrink-0 mt-1 h-6"></div>
+                <div class="w-1 bg-[var(--color-secondary)] flex-shrink-0 mt-1 h-6 rounded"></div>
               )}
 
-              <p class={`text-lg md:text-xl ${idx === 2 ? "italic text-gray-600" : "text-gray-800"}`}>
+              <p class={`text-lg md:text-xl ${idx === 2 ? "italic text-[color:color-mix(in_oklab,var(--color-gray)80%,var(--color-dark)20%)]" : "text-[var(--color-dark)]"}`}>
                 {testimonial}
               </p>
             </div>
@@ -60,37 +61,61 @@ const testimonials = [
         data-aos-delay="150"
       >
         <img
-          src="src/assets/fondo-testimonio.jpg"
+          src="src/assets/fondo-testimonio.webp"
           alt="Equipo celebrando"
           class="rounded-2xl shadow-2xl w-full h-auto object-cover [transform:translateZ(0)]"
           data-parallax
           data-speed="0.06"
         />
-        <!-- brillo sutil -->
-        <div class="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/10"></div>
+        <!-- brillo/contorno sutil -->
+        <div class="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-[color:color-mix(in_oklab,white_60%,transparent)]"></div>
+        <!-- overlay muy suave para legibilidad si pones texto encima en el futuro -->
+        <div class="pointer-events-none absolute inset-0 rounded-2xl"
+             style="background: linear-gradient(180deg, transparent 60%, color-mix(in oklab, var(--color-dark) 8%, transparent));"></div>
       </div>
     </div>
   </div>
 
-  <!-- Parallax muy suave en la imagen (scroll + mouse) -->
+  <!-- Parallax muy suave en la imagen (scroll + mouse) - sin acumular transform -->
   <script is:inline>
-    const item = document.querySelector('[data-parallax]');
-    const speed = parseFloat(item?.getAttribute('data-speed') || '0.05');
-
-    const onScroll = () => {
-      const y = window.scrollY || 0;
-      if (item) item.style.transform = `translate3d(0, ${y * speed}px, 0)`;
-    };
-    const onMove = (e) => {
+    (() => {
+      const item = document.querySelector('[data-parallax]');
       if (!item) return;
-      const { innerWidth: w, innerHeight: h } = window;
-      const dx = (e.clientX - w / 2) / w;
-      const dy = (e.clientY - h / 2) / h;
-      item.style.transform += ` translate(${dx * 6 * speed}px, ${dy * 6 * speed}px)`;
-    };
+      const speed = parseFloat(item.getAttribute('data-speed') || '0.05');
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('mousemove', onMove, { passive: true });
-    onScroll();
+      let scrollY = window.scrollY || 0;
+      let mouseX = 0, mouseY = 0;
+      let rafId = null;
+
+      const onScroll = () => {
+        scrollY = window.scrollY || 0;
+        requestTick();
+      };
+
+      const onMove = (e) => {
+        const { innerWidth: w, innerHeight: h } = window;
+        const dx = (e.clientX - w / 2) / w; // -0.5..0.5 aprox
+        const dy = (e.clientY - h / 2) / h;
+        mouseX = dx * 6;  // amplitud máxima 6px (súper sutil)
+        mouseY = dy * 6;
+        requestTick();
+      };
+
+      const render = () => {
+        rafId = null;
+        const ty = scrollY * speed;
+        const mx = mouseX * speed;
+        const my = mouseY * speed;
+        item.style.transform = `translate3d(${mx}px, ${ty + my}px, 0)`;
+      };
+
+      const requestTick = () => {
+        if (rafId == null) rafId = requestAnimationFrame(render);
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('mousemove', onMove, { passive: true });
+      onScroll();
+    })();
   </script>
 </section>

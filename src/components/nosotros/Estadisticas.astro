@@ -1,44 +1,51 @@
 ---
 const stats = [
-  { number: "35+", label: "Años de experiencia" },
-  { number: "5",   label: "Áreas de especialización" },
+  { number: "35+",  label: "Años de experiencia" },
+  { number: "5",    label: "Áreas de especialización" },
   { number: "100%", label: "Compromiso con resultados" },
 ];
 
-// helper opcional para separar valor y sufijo
+// helper para separar valor y sufijo
 const splitValue = (s) => {
   const match = String(s).match(/^([\d.,]+)(.*)$/);
   return { value: match ? match[1] : s, suffix: match ? match[2] : "" };
 };
 ---
-<section class="py-20 px-4 bg-gradient-to-r from-blue-950 to-blue-900 text-white overflow-hidden">
+
+<section class="py-20 px-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-dark)] text-[var(--color-light)] overflow-hidden">
   <div class="max-w-6xl mx-auto">
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
       {stats.map((stat, i) => {
         const { value, suffix } = splitValue(stat.number);
         return (
           <div
-            class="text-center p-8 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:border-yellow-400 transition-all
-                   will-change-transform transform-gpu"
+            class="text-center p-8 rounded-xl
+                   bg-white/10 backdrop-blur-sm
+                   border border-white/15
+                   hover:border-[var(--color-secondary)]/70
+                   transition-all will-change-transform transform-gpu"
             data-aos="zoom-in"
             data-aos-delay={i * 120}
           >
             <!-- número con contador -->
             <div
-              class="mb-3 text-5xl md:text-6xl font-extrabold text-yellow-400 leading-none"
+              class="mb-3 text-5xl md:text-6xl font-extrabold leading-none text-[var(--color-secondary)]"
               data-counter
-              data-target={value}           
-              data-suffix={suffix}          
-              data-duration="1400"          
-              data-decimals={value.includes('.') ? '1' : '0'}  
+              data-target={value}
+              data-suffix={suffix}
+              data-duration="1400"
+              data-decimals={value.includes('.') ? '1' : '0'}
             >
               0{suffix}
             </div>
 
-            <p class="text-blue-100 text-lg">{stat.label}</p>
+            <p class="text-lg text-[color:color-mix(in_oklab,var(--color-light)85%,var(--color-gray)15%)]">
+              {stat.label}
+            </p>
 
-            <!-- barrita sutil de énfasis -->
-            <div class="mt-4 h-1 w-12 mx-auto bg-yellow-400/70 rounded-full"></div>
+            <!-- barrita de énfasis -->
+            <div class="mt-4 h-1 w-12 mx-auto rounded-full"
+                 style="background: color-mix(in oklab, var(--color-secondary) 80%, transparent);"></div>
           </div>
         );
       })}
@@ -53,16 +60,17 @@ const splitValue = (s) => {
     const counters = [...document.querySelectorAll('[data-counter]')];
     const seen = new WeakSet();
 
+    function setFinal(el) {
+      const end = parseFloat(el.dataset.target || '0');
+      const suffix = el.dataset.suffix || '';
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      el.textContent = end.toFixed(decimals) + suffix;
+      seen.add(el);
+    }
+
     function animateCount(el) {
-      if (seen.has(el) || prefersReduced) {
-        // si ya se animó o el usuario prefiere menos movimiento -> setea valor final
-        const end = parseFloat(el.dataset.target || '0');
-        const suffix = el.dataset.suffix || '';
-        const decimals = parseInt(el.dataset.decimals || '0', 10);
-        el.textContent = end.toFixed(decimals) + suffix;
-        seen.add(el);
-        return;
-      }
+      if (seen.has(el)) return;
+      if (prefersReduced) return setFinal(el);
 
       const start = 0;
       const end = parseFloat(el.dataset.target || '0');
