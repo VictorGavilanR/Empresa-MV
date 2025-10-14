@@ -15,18 +15,27 @@ const aboutSubmenu = [
 ];
 ---
 
-<!-- Utilidad global: var de altura y comportamiento de anclas -->
 <style is:inline>
-  :root { --header-h: 120px; } /* fallback seguro */
-  /* Las secciones con id no quedarán ocultas al navegar por anclas */
+  :root { --header-h: 120px; }
   [id] { scroll-margin-top: calc(var(--header-h, 120px) + 12px); }
-  /* Clase util si prefieres aplicarla a <main> en vez del hero */
   .pt-header { padding-top: var(--header-h); }
 </style>
 
-<header id="header" class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-dark)] shadow-lg transition-all duration-300">
+<header
+  id="header"
+  data-aos="fade-down"
+  data-aos-duration="700"
+  data-aos-easing="ease-out"
+  class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-dark)] shadow-lg transition-all duration-300"
+>
   <!-- Top Bar -->
-  <div id="topbar" class="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-dark)] text-[var(--color-secondary)] py-3 px-4 transition-all duration-300">
+  <div
+    id="topbar"
+    data-aos="fade-down"
+    data-aos-delay="100"
+    data-aos-duration="700"
+    class="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-dark)] text-[var(--color-secondary)] py-3 px-4 transition-all duration-300"
+  >
     <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center text-sm leading-tight">
       <div class="flex items-center gap-4">
         <a href="tel:+56921816517" class="flex items-center gap-1 hover:text-[var(--color-light)] transition">
@@ -38,17 +47,21 @@ const aboutSubmenu = [
           <span>contacto@serviciosmvspa.cl</span>
         </a>
       </div>
-      <div class="text-[var(--color-secondary)]">
-        Lunes a Viernes: 8:00 - 20:00
-      </div>
+      <div class="text-[var(--color-secondary)]">Lunes a Viernes: 8:00 - 20:00</div>
     </div>
   </div>
 
-  <!-- Main Navigation -->
-  <nav id="nav" class="max-w-7xl mx-auto px-4 py-3 transition-all duration-300">
-    <div class="flex justify-between items-center">
+  <!-- NAV -->
+  <nav
+    id="nav"
+    data-aos="fade-down"
+    data-aos-delay="180"
+    data-aos-duration="700"
+    class="transition-all duration-300"
+  >
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
       <!-- Logo -->
-      <div class="flex items-center">
+      <div class="flex items-center" data-aos="zoom-in" data-aos-delay="220" data-aos-duration="500">
         <img
           id="logo"
           src="/assets/logo-header.webp"
@@ -59,115 +72,159 @@ const aboutSubmenu = [
         />
       </div>
 
-      <!-- Desktop Menu -->
+      <!-- Desktop -->
       <div class="hidden md:flex items-center space-x-1">
-        <a href="/#inicio" class="text-[var(--color-light)] hover:text-[var(--color-secondary)] transition font-medium px-4 py-2">Inicio</a>
+        <a href="/#inicio" data-aos="fade-down" data-aos-delay="260" data-aos-duration="600"
+           class="text-[var(--color-light)] hover:text-[var(--color-secondary)] transition font-medium px-4 py-2">Inicio</a>
 
-        <!-- Servicios Dropdown -->
-        <div class="relative group">
+        <!-- Servicios -->
+        <div class="relative group" data-aos="fade-down" data-aos-delay="300" data-aos-duration="600">
           <button class="text-[var(--color-light)] hover:text-[var(--color-secondary)] transition font-medium px-4 py-2 flex items-center gap-1">
             Servicios
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
           </button>
-          <div class="absolute top-full left-0 mt-0 w-56 bg-[var(--color-light)] rounded-b-lg shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out">
-            {services.map((service) => (
-              <a href={service.href} class="block px-4 py-3 text-[var(--color-primary)] hover:bg-[var(--color-light)] hover:text-[var(--color-secondary)] transition">
-                {service.label}
+          <div class="absolute top-full left-0 mt-0 w-56 bg-[var(--color-light)] rounded-b-lg shadow-xl py-2
+                      opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                      translate-y-[-6px] group-hover:translate-y-0 transition-all duration-200 ease-out">
+            {services.map((s) => (
+              <a href={s.href} class="block px-4 py-3 text-[var(--color-primary)] hover:bg-[var(--color-light)] hover:text-[var(--color-secondary)] transition">
+                {s.label}
               </a>
             ))}
           </div>
         </div>
 
-        <!-- Nosotros Dropdown -->
-        <div class="relative group">
+        <!-- Nosotros -->
+        <div class="relative group" data-aos="fade-down" data-aos-delay="340" data-aos-duration="600">
           <button class="text-[var(--color-light)] hover:text-[var(--color-secondary)] transition font-medium px-4 py-2 flex items-center gap-1">
             Nosotros
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-hover:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
           </button>
-          <div class="absolute top-full left-0 mt-0 w-56 bg-[var(--color-light)] rounded-b-lg shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out">
-            {aboutSubmenu.map((item) => (
-              <a href={item.href} class="block px-4 py-3 text-[var(--color-primary)] hover:bg-[var(--color-light)] hover:text-[var(--color-secondary)] transition">
-                {item.label}
+          <div class="absolute top-full left-0 mt-0 w-56 bg-[var(--color-light)] rounded-b-lg shadow-xl py-2
+                      opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                      translate-y-[-6px] group-hover:translate-y-0 transition-all duration-200 ease-out">
+            {aboutSubmenu.map((i) => (
+              <a href={i.href} class="block px-4 py-3 text-[var(--color-primary)] hover:bg-[var(--color-light)] hover:text-[var(--color-secondary)] transition">
+                {i.label}
               </a>
             ))}
           </div>
         </div>
 
-        <a href="#contacto" class="bg-[var(--color-secondary)] text-[var(--color-dark)] px-6 py-2 rounded-lg font-semibold hover:brightness-110 transition shadow-lg ml-4">
+        <a href="#contacto" data-aos="fade-down" data-aos-delay="380" data-aos-duration="600"
+           class="bg-[var(--color-secondary)] text-[var(--color-dark)] px-6 py-2 rounded-lg font-semibold hover:brightness-110 transition shadow-lg ml-4">
           Solicitar Consulta
         </a>
       </div>
 
-      <!-- Mobile Menu Button -->
+      <!-- Mobile Button (hamburguesa -> X) -->
       <button
-        class="md:hidden text-[var(--color-light)] p-2"
+        id="menuBtn"
+        class="md:hidden text-[var(--color-light)] p-2 relative"
         aria-label="Abrir menú"
-        onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+        <!-- hamburguesa -->
+        <svg id="icon-hamb" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+             class="block transition-all duration-300">
+          <line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/>
+        </svg>
+        <!-- X -->
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+             class="absolute inset-0 m-auto scale-75 opacity-0 pointer-events-none transition-all duration-300">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
       </button>
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-[var(--color-primary)] border-t border-[var(--color-dark)]">
+  <!-- Mobile Menu con animación -->
+  <div
+    id="mobile-menu"
+    class="md:hidden fixed inset-x-0 top-[var(--header-h)]
+           bg-[var(--color-primary)] border-t border-[var(--color-dark)]
+           origin-top scale-y-0 opacity-0 translate-y-[-8px]
+           pointer-events-none
+           transition-all duration-300 ease-out will-change-transform"
+  >
     <div class="max-w-7xl mx-auto px-4 py-4 space-y-2">
-      <a href="#inicio" class="block text-[var(--color-light)] hover:text-[var(--color-secondary)] py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Inicio</a>
-      <details class="group">
-        <summary class="cursor-pointer text-[var(--color-light)] hover:text-[var(--color-secondary)] py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition flex justify-between items-center font-medium">
-          Servicios
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-        </summary>
-        <div class="pl-4 space-y-1">
-          {services.map((service) => (
-            <a href={service.href} class="block text-[var(--color-secondary)] hover:text-[var(--color-light)] py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
-              {service.label}
-            </a>
-          ))}
-        </div>
-      </details>
-      <details class="group">
-        <summary class="cursor-pointer text-[var(--color-light)] hover:text-[var(--color-secondary)] py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition flex justify-between items-center font-medium">
-          Nosotros
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="group-open:rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-        </summary>
-        <div class="pl-4 space-y-1">
-          {aboutSubmenu.map((item) => (
-            <a href={item.href} class="block text-[var(--color-secondary)] hover:text-[var(--color-light)] py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </details>
+      <a href="#inicio" data-close class="block text-[var(--color-light)] hover:text-[var(--color-secondary)]
+         py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition">Inicio</a>
 
-      <a href="#contacto" class="block bg-[var(--color-secondary)] text-[var(--color-dark)] px-6 py-3 rounded-lg font-semibold hover:brightness-110 transition shadow-lg text-center mt-2" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Solicitar Consulta</a>
+      <!-- Servicios Accordion -->
+      <div class="group">
+        <button
+          class="w-full cursor-pointer text-[var(--color-light)] hover:text-[var(--color-secondary)]
+                 py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition
+                 flex justify-between items-center font-medium"
+          data-acc="serv" aria-expanded="false" aria-controls="acc-serv"
+        >
+          Servicios
+          <svg class="transition-transform duration-300" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div id="acc-serv" class="grid grid-rows-[0fr] transition-all duration-300 ease-out overflow-hidden">
+          <div class="min-h-0 pl-4 space-y-1 opacity-0 translate-y-[-6px] transition-all duration-300">
+            {services.map((s) => (
+              <a href={s.href} data-close
+                 class="block text-[var(--color-secondary)] hover:text-[var(--color-light)]
+                        py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition">
+                {s.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Nosotros Accordion -->
+      <div class="group">
+        <button
+          class="w-full cursor-pointer text-[var(--color-light)] hover:text-[var(--color-secondary)]
+                 py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition
+                 flex justify-between items-center font-medium"
+          data-acc="about" aria-expanded="false" aria-controls="acc-about"
+        >
+          Nosotros
+          <svg class="transition-transform duration-300" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div id="acc-about" class="grid grid-rows-[0fr] transition-all duration-300 ease-out overflow-hidden">
+          <div class="min-h-0 pl-4 space-y-1 opacity-0 translate-y-[-6px] transition-all duration-300">
+            {aboutSubmenu.map((i) => (
+              <a href={i.href} data-close
+                 class="block text-[var(--color-secondary)] hover:text-[var(--color-light)]
+                        py-2 px-4 hover:bg-[var(--color-dark)]/40 rounded transition">
+                {i.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <a href="#contacto" data-close
+         class="block bg-[var(--color-secondary)] text-[var(--color-dark)]
+                px-6 py-3 rounded-lg font-semibold hover:brightness-110 transition shadow-lg text-center mt-2">
+        Solicitar Consulta
+      </a>
     </div>
   </div>
 </header>
 
-<!-- <div id="spacer" ...></div> -->
-
 <script is:inline>
+  // --- Calcular --header-h dinámico
   const header = document.getElementById('header');
   const topbar = document.getElementById('topbar');
   const logo = document.getElementById('logo');
-
   function setHeaderVar() {
     if (!header) return;
-    // Altura real del header (topbar + nav) en cada momento
     const h = header.offsetHeight;
     document.documentElement.style.setProperty('--header-h', h + 'px');
   }
-
-  // Observa cambios de tamaño del header (incluye shrink/grow)
   if (header) {
     new ResizeObserver(setHeaderVar).observe(header);
     window.addEventListener('load', setHeaderVar, { once: true });
     window.addEventListener('resize', setHeaderVar);
     window.addEventListener('scroll', setHeaderVar, { passive: true });
   }
-
-  // Mantén tu comportamiento de shrink si quieres:
   if (topbar && logo) {
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
@@ -180,7 +237,77 @@ const aboutSubmenu = [
         topbar.classList.replace('py-2', 'py-3');
         logo.classList.replace('h-12', 'h-14');
       }
-      setHeaderVar(); // actualiza la var en cada estado
+      setHeaderVar();
     }, { passive: true });
   }
+
+  // --- Toggle menú mobile + animaciones
+  const menuBtn   = document.getElementById('menuBtn');
+  const mobile    = document.getElementById('mobile-menu');
+  const iconHamb  = document.getElementById('icon-hamb');
+  const iconClose = document.getElementById('icon-close');
+
+  function setMenu(open) {
+    menuBtn?.setAttribute('aria-expanded', String(open));
+
+    mobile.classList.toggle('pointer-events-none', !open);
+    mobile.classList.toggle('opacity-0', !open);
+    mobile.classList.toggle('translate-y-[-8px]', !open);
+    mobile.classList.toggle('scale-y-0', !open);
+
+    mobile.classList.toggle('opacity-100', open);
+    mobile.classList.toggle('translate-y-0', open);
+    mobile.classList.toggle('scale-y-100', open);
+
+    iconHamb.classList.toggle('opacity-0', open);
+    iconHamb.classList.toggle('pointer-events-none', open);
+    iconHamb.classList.toggle('scale-75', open);
+
+    iconClose.classList.toggle('opacity-0', !open);
+    iconClose.classList.toggle('pointer-events-none', !open);
+    iconClose.classList.toggle('scale-100', open);
+  }
+
+  let isOpen = false;
+  menuBtn?.addEventListener('click', () => {
+    isOpen = !isOpen;
+    setMenu(isOpen);
+  });
+
+  // Cerrar al clickear enlaces
+  mobile?.querySelectorAll('[data-close]').forEach(a => {
+    a.addEventListener('click', () => { isOpen = false; setMenu(false); });
+  });
+
+  // Cerrar con Esc
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) { isOpen = false; setMenu(false); }
+  });
+
+  // --- Acordeones suaves
+  const accButtons = document.querySelectorAll('button[data-acc]');
+  accButtons.forEach(btn => {
+    const id = btn.getAttribute('aria-controls');
+    const panel = id ? document.getElementById(id) : null;
+    const inner = panel?.firstElementChild;
+
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+
+      const svg = btn.querySelector('svg');
+      svg?.classList.toggle('rotate-180', !expanded);
+
+      panel?.classList.toggle('grid-rows-[0fr]', expanded);
+      panel?.classList.toggle('grid-rows-[1fr]', !expanded);
+
+      inner?.classList.toggle('opacity-0', expanded);
+      inner?.classList.toggle('translate-y-[-6px]', expanded);
+      inner?.classList.toggle('opacity-100', !expanded);
+      inner?.classList.toggle('translate-y-0', !expanded);
+    });
+  });
+
+  // Estado inicial
+  setMenu(false);
 </script>

@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components";
+
+---
+
+
+<!-- DIFERENCIADORES -->
+  <section class="py-20 px-4 bg-gradient-to-r from-gray-50 to-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-[var(--color-primary)] mb-4" data-aos="fade-up">
+          Por qué elegir <span class="text-[var(--color-secondary)]">Servicios MV</span>
+        </h2>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+          35+ años transformando negocios con excelencia, innovación y resultados tangibles.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {[
+          { icon: "mdi:target", title: "Enfoque a Resultados", desc: "Cada proyecto tiene KPIs claros y medibles desde el inicio." },
+          { icon: "mdi:people-outline", title: "Equipo Experto", desc: "Profesionales con 35+ años combinados de experiencia probada." },
+          { icon: "mdi:cog-outline", title: "Soluciones Personalizadas", desc: "Adaptamos cada servicio a tu contexto, no al revés." },
+        ].map((item, i) => (
+          <div class="p-8 bg-white rounded-xl border border-gray-200 hover:border-[var(--color-secondary)] hover:shadow-lg transition-all" data-aos="fade-up" data-aos-delay={i * 100}>
+            <div class="w-12 h-12 bg-gradient-to-br from-[var(--color-secondary)] to-[var(--color-primary)] rounded-lg flex items-center justify-center mb-4">
+              <Icon name={item.icon} class="w-6 h-6 text-white" />
+            </div>
+            <h3 class="text-xl font-bold text-[var(--color-primary)] mb-2">{item.title}</h3>
+            <p class="text-gray-600">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>

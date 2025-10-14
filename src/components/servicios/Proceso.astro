@@ -1,0 +1,27 @@
+
+  <!-- PROCESO -->
+  <section class="py-20 px-4 bg-white">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold text-[var(--color-primary)] mb-16" data-aos="fade-up">
+        Nuestro <span class="text-[var(--color-secondary)]">Proceso</span>
+      </h2>
+
+      <div class="grid md:grid-cols-4 gap-6">
+        {[
+          { num: "01", label: "Diagnóstico", desc: "Entendemos tu contexto y objetivos." },
+          { num: "02", label: "Propuesta", desc: "Presentamos plan claro y alcances." },
+          { num: "03", label: "Ejecución", desc: "Implementamos con rigor y transparencia." },
+          { num: "04", label: "Resultados", desc: "Medimos, optimizamos y escalamos." },
+        ].map((step, i) => (
+          <div class="relative" data-aos="fade-up" data-aos-delay={i * 80}>
+            <div class="text-5xl font-bold text-[var(--color-secondary)] opacity-60 mb-2">{step.num}</div>
+            <h3 class="text-xl font-bold text-[var(--color-primary)] mb-2">{step.label}</h3>
+            <p class="text-gray-600 text-sm">{step.desc}</p>
+            {i < 3 && (
+              <div class="hidden md:block absolute top-8 -right-3 text-3xl text-[var(--color-secondary)] opacity-30">→</div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>

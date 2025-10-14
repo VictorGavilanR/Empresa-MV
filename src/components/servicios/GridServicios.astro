@@ -1,0 +1,96 @@
+---
+
+const servicios = [
+  {
+    title: "Ingeniería en Informática",
+    description: "Desarrollo de software a medida, ERP/CRM, redes, ciberseguridad y transformación digital para que tu negocio escale sin fricción.",
+    bullets: ["Software a medida", "ERP/CRM", "Redes y seguridad", "Automatización"],
+    cta: { label: "Cotizar", href: "/#contacto" },
+    image: "/assets/informatica.webp",
+  },
+  {
+    title: "Diseño Gráfico",
+    description: "Identidad visual, UX/UI y animación. Diseñamos experiencias consistentes que comunican claro y convierten.",
+    bullets: ["Identidad corporativa", "UX/UI y sitios", "Animación", "Manuales gráficos"],
+    cta: { label: "Cotizar", href: "/#contacto" },
+    image: "/assets/diseno-grafico.webp",
+  },
+  {
+    title: "Ingeniería Civil Industrial",
+    description: "Optimización de procesos, mejora continua y gestión de proyectos para escalar capacidad y rentabilidad.",
+    bullets: ["Mejora continua", "Gestión de proyectos", "Análisis técnico-económico", "Estrategias de escalabilidad"],
+    cta: { label: "Cotizar", href: "/#contacto" },
+    image: "/assets/industrial.webp",
+  },
+  {
+    title: "Ingeniería en Alimentación",
+    description: "Control de calidad, normativa, trazabilidad y exportaciones con foco en inocuidad y eficiencia.",
+    bullets: ["Control de calidad", "Procesamiento y conservación", "Normativa y exportación", "Seguridad alimentaria"],
+    cta: { label: "Cotizar", href: "/#contacto" },
+    image: "/assets/ingenieria-alimentos.webp",
+  },
+  {
+    title: "Salud Enfermería",
+    description: "Atención primaria, monitoreo clínico y cuidados paliativos, con enfoque humano y protocolos claros.",
+    bullets: ["Atención primaria", "Monitoreo clínico", "Cuidados paliativos", "Promoción del bienestar"],
+    cta: { label: "Cotizar", href: "/#contacto" },
+    image: "/assets/salud.webp",
+  },
+];
+---
+
+
+  <!-- GRID: SERVICIOS -->
+  <section class="py-24 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {servicios.map((s, i) => (
+          <article
+            class="group rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+            data-aos="fade-up"
+            data-aos-delay={i * 60}
+          >
+            <!-- Imagen con overlay -->
+            <div class="relative h-48 overflow-hidden">
+              {s.image ? (
+                <img src={s.image} alt={s.title}
+                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                     loading="lazy" decoding="async" />
+              ) : null}
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+
+            </div>
+
+            <!-- Contenido -->
+            <div class="p-7 md:p-8">
+              <h3 class="text-xl md:text-2xl font-bold text-[var(--color-primary)] mb-3">
+                {s.title}
+              </h3>
+
+              <p class="text-gray-600 leading-relaxed mb-5">
+                {s.description}
+              </p>
+
+              {s.bullets?.length ? (
+                <ul class="space-y-2 mb-6">
+                  {s.bullets.map((b) => (
+                    <li class="flex gap-3 text-sm text-gray-700">
+                      <span class="text-[var(--color-secondary)] font-bold flex-shrink-0">✓</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+
+              <a href={s.cta.href}
+                 class="inline-flex items-center gap-2 font-bold text-[var(--color-secondary)] hover:text-[var(--color-primary)] group/link transition">
+                {s.cta.label} 
+                <span class="transition-transform group-hover/link:translate-x-1">→</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
